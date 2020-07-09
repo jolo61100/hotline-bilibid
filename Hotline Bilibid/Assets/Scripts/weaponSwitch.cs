@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSwitch : MonoBehaviour
+public class weaponSwitch : MonoBehaviour
 {
     [SerializeField] int selectedWeapon = 0;
+    [SerializeField] List<GameObject> weaponEquipped;
+    int indexMax;
+
     void Start()
     {
+
         selectWeapon();
+        weaponEquipped = new List<GameObject>();
+
     }
 
     // Update is called once per frame
@@ -25,6 +31,7 @@ public class WeaponSwitch : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
+
             if (selectedWeapon <= 0)
                 selectedWeapon = transform.childCount - 1;
             else
@@ -37,6 +44,7 @@ public class WeaponSwitch : MonoBehaviour
         }
     }
 
+
     void selectWeapon()
     {
         int i = 0;
@@ -48,5 +56,7 @@ public class WeaponSwitch : MonoBehaviour
                 weapon.gameObject.SetActive(false);
             i++;
         }
+
     }
+
 }
