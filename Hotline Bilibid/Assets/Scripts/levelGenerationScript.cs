@@ -11,10 +11,4 @@ public class levelGenerationScript : MonoBehaviour
         int rand = Random.Range(0, objects.Length);
         Instantiate(objects[rand], transform.position, Quaternion.identity);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
