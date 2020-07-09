@@ -11,7 +11,7 @@ public class turretScript : MonoBehaviour
     [SerializeField] LayerMask _layerMask;
     [SerializeField] LineRenderer _lineOfSight;
     [SerializeField] Gradient _redColor;
-    float _lineWidthDefault = 0.025f;
+    float _lineWidthDefault = 0.05f;
     float _lineWidthActive = 0.00025f;
     float _timeBtwShots;
 
