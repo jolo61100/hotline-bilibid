@@ -19,31 +19,30 @@ public class playerScript : MonoBehaviour, iCharacterScript
     void Start()
     {
         _rb = this.GetComponent<Rigidbody2D>();
-        Physics2D.queriesStartInColliders = false;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         _move();
-        if (Input.GetButtonDown("Fire1"))
-        {
-            _shootBullet();
-        }
     }
 
     private void FixedUpdate()
     {
         _moveLogic();
+        if (Input.GetButton("Fire1"))
+        {
+            //_shootBullet();
+        }
     }
 
     public void _move()
     {
         _movement = new Vector2
-            (
-                Input.GetAxisRaw("Horizontal"),
-                Input.GetAxisRaw("Vertical")
-            );
+            (Input.GetAxisRaw("Horizontal"), 
+            Input.GetAxisRaw("Vertical"));
+
         _movement.Normalize();
         _restrictMovement();
     }
@@ -71,7 +70,7 @@ public class playerScript : MonoBehaviour, iCharacterScript
         transform.position = new Vector3(xVal, yVal, 0);
     }
 
-    public void _shootBullet()
+    /*public void _shootBullet()//fix
     {
         GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
 
@@ -79,6 +78,16 @@ public class playerScript : MonoBehaviour, iCharacterScript
 
         _bulletRB.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
 
+    }*/
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            health._currentHealth -= 1;
+            Debug.Log("oof owie");
+        }
+       
     }
 
 }

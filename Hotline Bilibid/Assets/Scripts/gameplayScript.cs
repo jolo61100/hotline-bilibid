@@ -9,16 +9,20 @@ public class gameplayScript : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] _text;
     [SerializeField] float _timeToHide = 3.0f;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
+       
+
         StartCoroutine(gameStart());
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
     void clearText()
