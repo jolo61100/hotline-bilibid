@@ -7,5 +7,4 @@ public interface iCharacterScript
     void _move();
     void _moveLogic();
     void _restrictMovement();
-    //void _shootBullet();
 }

@@ -95,10 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefcbdd233db0224fbba88dc93232664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 1
-  distance: 5
-  damage: 2
-  speed: 5
+  lifeTime: 5
+  distance: 10
+  damage: 5
+  speed: 20
   destroyEffect: {fileID: 0}
   whatIsSolid:
     serializedVersion: 2

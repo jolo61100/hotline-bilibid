@@ -29,7 +29,7 @@ public class projectile : MonoBehaviour
             destroyProjectile();
         }
 
-        if (collision.collider.CompareTag("Wall"))//works but cannot collide with wall
+        if (collision.collider.CompareTag("Wall"))//doesn't work with wall
         {
             Debug.Log("WALLED");
             destroyProjectile();
@@ -39,7 +39,7 @@ public class projectile : MonoBehaviour
     void Translation()
     {
         
-        transform.Translate(Vector2.up * speed * Time.deltaTime);
+        transform.Translate(Vector2.up * speed * Time.deltaTime);//makes the projectile move
     }
     
 

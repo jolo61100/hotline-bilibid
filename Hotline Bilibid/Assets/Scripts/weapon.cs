@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class weapon : MonoBehaviour
+public class weapon : MonoBehaviour 
 {
-    [SerializeField] GameObject projectile;
-    [SerializeField] Transform[] firePoints;
+    [SerializeField] GameObject bullet;
+    [SerializeField] Transform firePoint;
+    [SerializeField] int bulletCount;
     [SerializeField] float nextFire;
     [SerializeField] float fireRate;
+    [SerializeField] bool autoFire; 
+
     void Update()
     {
         shoot();
@@ -28,13 +31,52 @@ public class weapon : MonoBehaviour
 
     void shoot()
     {
-        if (Input.GetButton("Fire1") && nextFire <= Time.time)
+        if (autoFire == true)//auto
         {
-            foreach (Transform firePoint in firePoints)
+            if (Input.GetMouseButton(0) && nextFire <= Time.time)
             {
-                nextFire = Time.time + fireRate;
-                Instantiate(projectile, firePoint.position, firePoint.rotation);//Instantiate makes the bullets spawn at the firepoint position and rotation
+                if (bulletCount > 1)
+                {
+                    for (int shots = 0; shots != bulletCount; shots++)//multi bullet gun
+                    {
+                        nextFire = Time.time + fireRate;
+                        float rand = Random.Range(-10f, 10f);           //Randomize value first
+                        firePoint.transform.Rotate(0, 0, 0 + rand);     //Set the randomize value to z (Angle of Barrel)
+                        Instantiate(bullet, firePoint.position, firePoint.rotation);
+                        firePoint.transform.Rotate(0, 0, 0 - rand);     //Resets the barrel's position back to normal
+                    }
+                }
+                else // single bullet
+                {
+                    nextFire = Time.time + fireRate;
+                    firePoint.transform.Rotate(0, 0, 0);
+                    Instantiate(bullet, firePoint.position, firePoint.rotation);
+                }
             }
         }
-    }
+
+        else//semi auto
+        {
+            if (Input.GetMouseButtonDown(0) && nextFire <= Time.time)
+            {
+                if (bulletCount > 1)
+                {
+                    for (int shots = 0; shots != bulletCount; shots++)
+                    {
+                        nextFire = Time.time + fireRate;
+                        float rand = Random.Range(-10f, 10f);           //Randomize value first
+                        firePoint.transform.Rotate(0, 0, 0 + rand);     //Set the randomize value to z (Angle of Barrel)
+                        Instantiate(bullet, firePoint.position, firePoint.rotation);
+                        firePoint.transform.Rotate(0, 0, 0 - rand);     //Resets the barrel's position back to normal
+                    }
+                }
+                else
+                {
+                    nextFire = Time.time + fireRate;
+                    firePoint.transform.Rotate(0, 0, 0);
+                    Instantiate(bullet, firePoint.position, firePoint.rotation);
+                }
+            }
+        }
+    }          
 }

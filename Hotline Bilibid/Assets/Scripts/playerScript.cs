@@ -15,13 +15,11 @@ public class playerScript : MonoBehaviour, iCharacterScript
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] float _bulletForce = 20.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         _rb = this.GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         _move();
@@ -30,10 +28,6 @@ public class playerScript : MonoBehaviour, iCharacterScript
     private void FixedUpdate()
     {
         _moveLogic();
-        if (Input.GetButton("Fire1"))
-        {
-            //_shootBullet();
-        }
     }
 
     public void _move()
@@ -68,15 +62,4 @@ public class playerScript : MonoBehaviour, iCharacterScript
 
         transform.position = new Vector3(xVal, yVal, 0);
     }
-
-    /*public void _shootBullet()//fix
-    {
-        GameObject bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
-
-        Rigidbody2D _bulletRB = bullet.GetComponent<Rigidbody2D>();
-
-        _bulletRB.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
-
-    }*/
-
 }
