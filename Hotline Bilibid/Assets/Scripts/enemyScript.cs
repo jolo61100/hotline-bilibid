@@ -14,11 +14,9 @@ public class enemyScript : MonoBehaviour, iCharacterScript
     {
         _rb = this.GetComponent<Rigidbody2D>();
         _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        Physics2D.queriesStartInColliders = false;
     }
 
-    private void Update()
-    {
-    }
     private void FixedUpdate()
     {
         _moveLogic();

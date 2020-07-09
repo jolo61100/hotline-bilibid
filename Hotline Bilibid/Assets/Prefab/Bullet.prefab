@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2098382534346905220}
   - component: {fileID: 2098382534346905275}
-  - component: {fileID: 2098382534346905273}
-  - component: {fileID: 2098382534346905274}
-  - component: {fileID: 1529114597547045110}
+  - component: {fileID: -1331098614155922329}
+  - component: {fileID: -1408391476008471486}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -84,28 +83,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &2098382534346905273
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &-1331098614155922329
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098382534346905272}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!58 &2098382534346905274
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eefcbdd233db0224fbba88dc93232664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 1
+  distance: 5
+  damage: 2
+  speed: 5
+  destroyEffect: {fileID: 0}
+  whatIsSolid:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!58 &-1408391476008471486
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,15 +119,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.32
---- !u!114 &1529114597547045110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2098382534346905272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d81fbc1d38db649aaa0a14c41407ab0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
