@@ -23,6 +23,10 @@ public class playerScript : MonoBehaviour, iCharacterScript
     void Update()
     {
         _move();
+        if (Input.GetButtonDown("Fire1"))
+        {
+            _shootBullet();
+        }
     }
 
     private void FixedUpdate()
@@ -33,7 +37,7 @@ public class playerScript : MonoBehaviour, iCharacterScript
     public void _move()
     {
         _movement = new Vector2
-            (Input.GetAxisRaw("Horizontal"), 
+            (Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical"));
 
         _movement.Normalize();
@@ -61,5 +65,12 @@ public class playerScript : MonoBehaviour, iCharacterScript
         float yVal = Mathf.Clamp(transform.position.y, lowerLeftCorner.y + playerHeight, upperRightCorner.y - playerHeight);
 
         transform.position = new Vector3(xVal, yVal, 0);
+    }
+
+    void _shootBullet()
+    {
+        GameObject _bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
+        Rigidbody2D _bulletRB = _bullet.GetComponent<Rigidbody2D>();
+        _bulletRB.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
     }
 }
