@@ -7,33 +7,20 @@ using TMPro;
 public class gameplayScript : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] TextMeshProUGUI[] _text;
-    [SerializeField] float _timeToHide = 3.0f;
+    [SerializeField] TextMeshProUGUI _timer;
+    [SerializeField] float _timeToNextWave = 10.0f;
+    public static bool _spawnWave = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(gameStart());
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-    }
-
-    void clearText()
-    {
-        for (int i = 0; i < _text.Length; i++)
-        {
-            _text[i].text = string.Empty;
-        }
-    }
-
-    IEnumerator gameStart()
-    {
-        yield return new WaitForSeconds(_timeToHide);
-        clearText();
     }
 }

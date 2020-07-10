@@ -13,6 +13,10 @@ public class bulletScript : MonoBehaviour
     {
         if (other != null)
         {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(other.gameObject);
+            }
             Destroy(this.gameObject);
         }
     }

@@ -13,7 +13,7 @@ public class playerScript : MonoBehaviour, iCharacterScript
     [Header("SHOOTING")]
     [SerializeField] Transform _firePoint;
     [SerializeField] GameObject _bulletPrefab;
-    [SerializeField] float _bulletForce = 20.0f;
+    [SerializeField] float _bulletForce = 15.0f;
 
     void Start()
     {
