@@ -9,8 +9,9 @@ public class spawnerScript : MonoBehaviour
 
     private void Start()
     {
-        // /StartCoroutine(controller.game());
+        //StartCoroutine(controller.game());
         Spawn();
+        Destroy(this.gameObject);
     }
 
     void Spawn()

@@ -11,7 +11,7 @@ public class gameplayScript : MonoBehaviour
     [SerializeField] float _timeToNextWave = 10.0f;
     float _currentTime;
     [Header("SPAWN")]
-    [SerializeField] GameObject[] _objectsEnemy;
+    [SerializeField] GameObject _EnemySpawner;
 
 
     // Start is called before the first frame update
@@ -39,7 +39,6 @@ public class gameplayScript : MonoBehaviour
 
     void SpawnEnemy()
     {
-        int _rand = Random.Range(0, _objectsEnemy.Length);
-        Instantiate(_objectsEnemy[_rand], transform.position, Quaternion.identity);
+        Instantiate(_EnemySpawner, transform.position, Quaternion.identity);
     }
 }
