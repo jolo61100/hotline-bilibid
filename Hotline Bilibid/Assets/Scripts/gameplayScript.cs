@@ -15,7 +15,7 @@ public class gameplayScript : MonoBehaviour
     public static int _playerScore;
 
     [Header("SPAWN")]
-    [SerializeField] GameObject _EnemySpawner;
+    [SerializeField] GameObject[] _EnemySpawner;
 
     public static bool _isAlive = true;
 
@@ -65,6 +65,10 @@ public class gameplayScript : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Instantiate(_EnemySpawner, transform.position, Quaternion.identity);
+        int rand = Random.Range(0, _EnemySpawner.Length);
+        int rand1 = Random.Range(0, _EnemySpawner.Length);
+        Instantiate(_EnemySpawner[rand], transform.position, Quaternion.identity);
+        Instantiate(_EnemySpawner[rand1], transform.position, Quaternion.identity);
+        Debug.Log(rand + "," + rand1);
     }
 }
