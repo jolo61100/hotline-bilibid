@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 20
-  productGUID: d1ecf41dd9075cb4a859d49cad69ae15
+  productGUID: 63df429a12a513828a684fb13a3de34d
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -610,7 +610,6 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
-    Collab: 0
     UNet: 1
   luminIcon:
     m_Name: 
@@ -624,10 +623,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 1524f594-42cf-445b-a73f-c96eb290e60d
+  cloudProjectId: 
   framebufferDepthMemorylessMode: 0
-  projectName: Hotline Bilibid
-  organizationId: hotline-bilibid
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

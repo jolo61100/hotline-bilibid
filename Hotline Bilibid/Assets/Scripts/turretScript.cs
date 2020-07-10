@@ -82,7 +82,6 @@ public class turretScript : MonoBehaviour
             _timeBtwShots = _startTimeBtwShots;
             _lineOfSight.startWidth = _lineWidthDefault;
             _lineOfSight.endWidth = _lineWidthDefault;
-            Debug.Log("Shoot");
         }
         else
         {

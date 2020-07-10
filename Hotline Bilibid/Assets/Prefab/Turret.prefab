@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5965201192366102306}
   m_Layer: 0
   m_Name: Turret
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5965201192366102313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0068942b06e348408f628391962d78b, type: 3}
+  m_Script: {fileID: 11500000, guid: e20b539622bbaf13791f183a30d7f442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _startTimeBtwShots: 3
@@ -104,8 +104,8 @@ MonoBehaviour:
   _lineOfSight: {fileID: 5965201192988685070}
   _redColor:
     serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 1, g: 0, b: 0, a: 1}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -128,9 +128,10 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 1
+    m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  _shoot: []
 --- !u!61 &5965201192366102309
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class gameplayScript : MonoBehaviour
@@ -8,6 +9,7 @@ public class gameplayScript : MonoBehaviour
     [Header("UI")]
     [SerializeField] TextMeshProUGUI[] _text;
     [SerializeField] float _timeToHide = 3.0f;
+
 
     // Start is called before the first frame update
     void Start()
