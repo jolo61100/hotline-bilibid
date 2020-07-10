@@ -15,6 +15,7 @@ public class bulletScript : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Enemy"))
             {
+                gameplayScript._playerScore++;
                 Destroy(other.gameObject);
             }
             Destroy(this.gameObject);
