@@ -6,7 +6,7 @@ public class playerScript : MonoBehaviour, iCharacterScript
 {
     [Header("MOVEMENT")]
     [SerializeField] float _moveSpeed = 5.0f;
-    Vector2 _movement;
+    Vector3 _movement;
     Vector2 _mousePosition;
     Rigidbody2D _rb;
 
@@ -15,6 +15,9 @@ public class playerScript : MonoBehaviour, iCharacterScript
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] float _bulletForce = 15.0f;
 
+    public Animator animator; 
+
+
     void Start()
     {
         _rb = this.GetComponent<Rigidbody2D>();
@@ -22,6 +25,11 @@ public class playerScript : MonoBehaviour, iCharacterScript
 
     void Update()
     {
+        animator.SetFloat("Vertical", _movement.y);
+        animator.SetFloat("Horizontal", _movement.x);
+        animator.SetFloat("Magnitude", _movement.magnitude);
+
+
         _move();
         if (Input.GetButtonDown("Fire1"))
         {
@@ -36,9 +44,9 @@ public class playerScript : MonoBehaviour, iCharacterScript
 
     public void _move()
     {
-        _movement = new Vector2
-            (Input.GetAxisRaw("Horizontal"),
-            Input.GetAxisRaw("Vertical"));
+        _movement = new Vector3 (Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
+
+        transform.position = transform.position + _movement * Time.deltaTime;
 
         _movement.Normalize();
         _restrictMovement();
@@ -46,11 +54,9 @@ public class playerScript : MonoBehaviour, iCharacterScript
 
     public void _moveLogic()
     {
-        _rb.MovePosition(_rb.position + _movement * _moveSpeed * Time.fixedDeltaTime);
+        //_rb.MovePosition(_rb.position + (_movement * _moveSpeed * Time.fixedDeltaTime));
         _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 lookDirection = _mousePosition - _rb.position;
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        _rb.rotation = angle;
+       
     }
 
     public void _restrictMovement()

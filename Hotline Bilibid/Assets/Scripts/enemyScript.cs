@@ -51,15 +51,8 @@ public class enemyScript : MonoBehaviour, iCharacterScript
         transform.position = new Vector3(xVal, yVal, 0);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public void _shootBullet()
     {
-        if (other != null)
-        {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                gameplayScript._isAlive = false;
-            }
-        }
-    }
 
+    }
 }
