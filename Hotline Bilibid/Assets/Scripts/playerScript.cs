@@ -9,11 +9,12 @@ public class playerScript : MonoBehaviour, iCharacterScript
     Vector2 _movement;
     Vector2 _mousePosition;
     Rigidbody2D _rb;
+    [SerializeField] gunData _data;
 
-    [Header("SHOOTING")]
-    [SerializeField] Transform _firePoint;
-    [SerializeField] GameObject _bulletPrefab;
-    [SerializeField] float _bulletForce = 15.0f;
+    // [Header("SHOOTING")]
+    // [SerializeField] Transform _firePoint;
+    // [SerializeField] GameObject _bulletPrefab;
+    // [SerializeField] float _bulletForce = 15.0f;
 
     void Start()
     {
@@ -23,10 +24,10 @@ public class playerScript : MonoBehaviour, iCharacterScript
     void Update()
     {
         _move();
-        if (Input.GetButtonDown("Fire1"))
-        {
-            _shootBullet();
-        }
+        // if (Input.GetButtonDown("Fire1"))
+        // {
+        //     _shootBullet();
+        // }
     }
 
     private void FixedUpdate()
@@ -47,10 +48,10 @@ public class playerScript : MonoBehaviour, iCharacterScript
     public void _moveLogic()
     {
         _rb.MovePosition(_rb.position + _movement * _moveSpeed * Time.fixedDeltaTime);
-        _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 lookDirection = _mousePosition - _rb.position;
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        _rb.rotation = angle;
+        // _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Vector2 lookDirection = _mousePosition - _rb.position;
+        // float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
+        // _rb.rotation = angle;
     }
 
     public void _restrictMovement()
@@ -67,10 +68,25 @@ public class playerScript : MonoBehaviour, iCharacterScript
         transform.position = new Vector3(xVal, yVal, 0);
     }
 
-    void _shootBullet()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        GameObject _bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
-        Rigidbody2D _bulletRB = _bullet.GetComponent<Rigidbody2D>();
-        _bulletRB.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
+        if (other.gameObject.CompareTag("Gun"))
+        {
+            _data = other.gameObject.GetComponent<gunPickUp>().returnData();
+            Debug.Log(_data._name);
+            Destroy(other.gameObject);
+        }
     }
+
+    public gunData returnData()
+    {
+        return _data;
+    }
+
+    // void _shootBullet()
+    // {
+    //     GameObject _bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
+    //     Rigidbody2D _bulletRB = _bullet.GetComponent<Rigidbody2D>();
+    //     _bulletRB.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
+    // }
 }
