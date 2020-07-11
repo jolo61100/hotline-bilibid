@@ -9,7 +9,9 @@ public class playerScript : MonoBehaviour, iCharacterScript
     Vector2 _movement;
     Vector2 _mousePosition;
     Rigidbody2D _rb;
-    [SerializeField] gunData _data;
+    //[SerializeField] gunData _data;
+
+    public Animator animator;
 
     // [Header("SHOOTING")]
     // [SerializeField] Transform _firePoint;
@@ -23,6 +25,10 @@ public class playerScript : MonoBehaviour, iCharacterScript
 
     void Update()
     {
+        animator.SetFloat("Vertical", _movement.y);
+        animator.SetFloat("Horizontal", _movement.x);
+        animator.SetFloat("Magnitude", _movement.magnitude);
+
         _move();
         // if (Input.GetButtonDown("Fire1"))
         // {
@@ -68,20 +74,20 @@ public class playerScript : MonoBehaviour, iCharacterScript
         transform.position = new Vector3(xVal, yVal, 0);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Gun"))
-        {
-            _data = other.gameObject.GetComponent<gunPickUp>().returnData();
-            Debug.Log(_data._name);
-            Destroy(other.gameObject);
-        }
-    }
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Gun"))
+    //     {
+    //         _data = other.gameObject.GetComponent<gunPickUp>().returnData();
+    //         Debug.Log(_data._name);
+    //         Destroy(other.gameObject);
+    //     }
+    // }
 
-    public gunData returnData()
-    {
-        return _data;
-    }
+    // public gunData returnData()
+    // {
+    //     return _data;
+    // }
 
     // void _shootBullet()
     // {
