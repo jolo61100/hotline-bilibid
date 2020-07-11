@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d18f5c4b5f78cfda9f90ff4fc10a7d, type: 3}
   m_Name: GunData
   m_EditorClassIdentifier: 
-  _name: 
-  _bulletPrefab: {fileID: 0}
-  _bulletForce: 0
+  _name: gun2
+  _bulletPrefab: {fileID: 3299706803375491562, guid: d7d6ad0735a3f7dbc89fbdef62a685f4,
+    type: 3}
+  _bulletForce: 50
   _startTimeBtwShots: 0
