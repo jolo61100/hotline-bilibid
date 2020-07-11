@@ -10,8 +10,7 @@ public class playerScript : MonoBehaviour, iCharacterScript
     Vector2 _mousePosition;
     Rigidbody2D _rb;
     //[SerializeField] gunData _data;
-
-    public Animator animator;
+    private Animator animator;
 
     // [Header("SHOOTING")]
     // [SerializeField] Transform _firePoint;
@@ -20,6 +19,7 @@ public class playerScript : MonoBehaviour, iCharacterScript
 
     void Start()
     {
+        animator = this.GetComponent<Animator>();
         _rb = this.GetComponent<Rigidbody2D>();
     }
 
