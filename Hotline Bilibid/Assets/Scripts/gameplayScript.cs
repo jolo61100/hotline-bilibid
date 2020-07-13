@@ -60,7 +60,7 @@ public class gameplayScript : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         _playerScore = 0;
         _isAlive = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("MainMenu");
     }
 
     void SpawnEnemy()
@@ -71,4 +71,5 @@ public class gameplayScript : MonoBehaviour
         Instantiate(_EnemySpawner[rand1], transform.position, Quaternion.identity);
         Debug.Log(rand + "," + rand1);
     }
+
 }
