@@ -12,6 +12,9 @@ public class playerScript : MonoBehaviour, iCharacterScript
     //[SerializeField] gunData _data;
     private Animator animator;
 
+    AudioSource audioSrc;
+    bool isMoving = false;
+
     // [Header("SHOOTING")]
     // [SerializeField] Transform _firePoint;
     // [SerializeField] GameObject _bulletPrefab;
@@ -21,19 +24,22 @@ public class playerScript : MonoBehaviour, iCharacterScript
     {
         animator = this.GetComponent<Animator>();
         _rb = this.GetComponent<Rigidbody2D>();
+        audioSrc = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        animator.SetFloat("Vertical", _movement.y);
-        animator.SetFloat("Horizontal", _movement.x);
-        animator.SetFloat("Magnitude", _movement.magnitude);
-
-        _move();
-        // if (Input.GetButtonDown("Fire1"))
-        // {
-        //     _shootBullet();
-        // }
+        if (gameplayScript._isAlive)
+        {
+            animator.SetFloat("Vertical", _movement.y);
+            animator.SetFloat("Horizontal", _movement.x);
+            animator.SetFloat("Magnitude", _movement.magnitude);
+            _move();
+        }
+        else
+        {
+            _movement = new Vector2(0, 0);
+        }
     }
 
     private void FixedUpdate()
@@ -47,6 +53,28 @@ public class playerScript : MonoBehaviour, iCharacterScript
             (Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical"));
 
+        if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
+
+        if (isMoving)
+        {
+            if (!audioSrc.isPlaying)
+            {
+                audioSrc.Play();
+            }
+        }
+        else
+        {
+            audioSrc.Stop();
+        }
+
+
         _movement.Normalize();
         _restrictMovement();
     }
@@ -54,10 +82,6 @@ public class playerScript : MonoBehaviour, iCharacterScript
     public void _moveLogic()
     {
         _rb.MovePosition(_rb.position + _movement * _moveSpeed * Time.fixedDeltaTime);
-        // _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // Vector2 lookDirection = _mousePosition - _rb.position;
-        // float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        // _rb.rotation = angle;
     }
 
     public void _restrictMovement()
@@ -74,25 +98,19 @@ public class playerScript : MonoBehaviour, iCharacterScript
         transform.position = new Vector3(xVal, yVal, 0);
     }
 
-    // private void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     if (other.gameObject.CompareTag("Gun"))
-    //     {
-    //         _data = other.gameObject.GetComponent<gunPickUp>().returnData();
-    //         Debug.Log(_data._name);
-    //         Destroy(other.gameObject);
-    //     }
-    // }
 
-    // public gunData returnData()
-    // {
-    //     return _data;
-    // }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
 
-    // void _shootBullet()
-    // {
-    //     GameObject _bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
-    //     Rigidbody2D _bulletRB = _bullet.GetComponent<Rigidbody2D>();
-    //     _bulletRB.AddForce(_firePoint.up * _bulletForce, ForceMode2D.Impulse);
-    // }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            FindObjectOfType<AudioManager>().Play("Hurt");
+            healthCounter._currentHealth -= 1;
+            Debug.Log("oof owie" + healthCounter._currentHealth);
+        }
+        if (healthCounter._currentHealth <= 0)
+        {
+            FindObjectOfType<AudioManager>().Play("PlayerDeath");
+        }
+    }
 }

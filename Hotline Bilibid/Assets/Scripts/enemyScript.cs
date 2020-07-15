@@ -16,10 +16,12 @@ public class enemyScript : MonoBehaviour, iCharacterScript
         _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         Physics2D.queriesStartInColliders = false;
     }
-
     private void FixedUpdate()
     {
-        _moveLogic();
+        if (gameplayScript._isAlive)
+        {
+            _moveLogic();
+        }
     }
 
     public void _move()
@@ -51,15 +53,30 @@ public class enemyScript : MonoBehaviour, iCharacterScript
         transform.position = new Vector3(xVal, yVal, 0);
     }
 
+    void tellPos()
+    {
+        if (gameObject.activeSelf)
+        {
+            Debug.Log(transform);
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other != null)
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.gameObject.CompareTag("bullet")) // bullet
             {
-                gameplayScript._isAlive = false;
+                tellPos();
+                gameplayScript._playerScore++;
+                EnemyPool.Instance.ReturnToPool(this.gameObject);
             }
+            if (other.gameObject.CompareTag("Player")) // bullet
+            {
+                tellPos();
+                EnemyPool.Instance.ReturnToPool(this.gameObject);
+            }
+
         }
     }
-
 }

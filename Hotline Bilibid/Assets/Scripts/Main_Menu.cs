@@ -7,13 +7,13 @@ public class Main_Menu : MonoBehaviour
 {
     public void LoadScene(string sceneName)
     {
+        FindObjectOfType<AudioManager>().Play("Select");
         SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame()
     {
-        Debug.Log("QUIT!!!");
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         Application.Quit();
     }
 }

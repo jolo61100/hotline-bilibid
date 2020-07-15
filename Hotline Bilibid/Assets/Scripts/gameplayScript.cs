@@ -15,9 +15,17 @@ public class gameplayScript : MonoBehaviour
     public static int _playerScore;
 
     [Header("SPAWN")]
+    [SerializeField] GameObject[] _healthspawns;
     [SerializeField] GameObject[] _EnemySpawner;
+    [SerializeField] EnemyPool ePool;
+    [SerializeField] int enemyCount;
 
     public static bool _isAlive = true;
+
+
+    public AudioClip impact;
+    AudioSource audioSource;
+
 
 
     // Start is called before the first frame update
@@ -25,13 +33,18 @@ public class gameplayScript : MonoBehaviour
     {
         _gameOver.text = string.Empty;
         _currentTime = _timeToNextWave;
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine(game());
-        SpawnEnemy();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (healthCounter._currentHealth < 1)
+        {
+            //audioSource.PlayOneShot(impact, 0.7F); //Play PlayerDeath SFX
+            _isAlive = false;
+        }
         if (!_isAlive)
         {
             StartCoroutine(gameEnd());
@@ -51,6 +64,7 @@ public class gameplayScript : MonoBehaviour
         _isAlive = true;
         _currentTime = _timeToNextWave;
         SpawnEnemy();
+        SpawnHealth();
         StartCoroutine(game());
     }
 
@@ -63,13 +77,18 @@ public class gameplayScript : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    void SpawnEnemy()
+    void SpawnEnemy()//spawn count per wave
     {
-        int rand = Random.Range(0, _EnemySpawner.Length);
-        int rand1 = Random.Range(0, _EnemySpawner.Length);
-        Instantiate(_EnemySpawner[rand], transform.position, Quaternion.identity);
-        Instantiate(_EnemySpawner[rand1], transform.position, Quaternion.identity);
-        Debug.Log(rand + "," + rand1);
+        for (int i = 0; i < enemyCount; i++)
+        {
+            var test = EnemyPool.Instance.Get();
+            test.gameObject.SetActive(true);
+        }
     }
 
+    void SpawnHealth()
+    {
+        var health = HealthitemPool.Instance.Get();
+        health.gameObject.SetActive(true);
+    }
 }

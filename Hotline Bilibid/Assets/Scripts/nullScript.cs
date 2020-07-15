@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class nullScript : MonoBehaviour
 {
-    private void Start()
+    private void Update()
     {
-        StartCoroutine(_destroyObject());
-    }
-
-    IEnumerator _destroyObject()
-    {
-        yield return new WaitForSeconds(1.0f);
         Destroy(this.gameObject);
     }
 }
